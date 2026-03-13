@@ -4,13 +4,14 @@
 - **Correo:** jcamilo.mona@udea.edu.co
 
 ## Resumen del Caso
-
+Para resolver el crimen en la ciudad de SQL, se tiene como pista inicial que el asesinato ocurrió el 15 de enero de 2015. Entonces se tiene el testimonio de dos testigos que apuntan a un asesino gracias a la relación que tenia con un gimnasio, donde fue reconocido por el primer testigo y la bolsa del mismo gimnasio que fue vista por el segundo testigo el dia del crimen. Además por la conexión a un evento al que asistió el asesino el mismo dia del crimen, se llego al ejecutor del crimen. Este confienza el crimen y declara que hay una autora intelectual del mismo. El crimen es resuelto.
 ## Bitacora de investigación
 ### Query 1
 ```SQL
 SELECT * FROM crime_scene_report WHERE date=20180115 AND city='SQL City' AND type='murder'
 ```
 ### Evidencia
+![Busqueda del reporte](evidencia/Paso_1.png)
 
 > **Conclusión**
 > Analizando la salida de la consulta, se encontró que las imágenes de seguridad muestran dos 
@@ -24,6 +25,7 @@ SELECT * FROM crime_scene_report WHERE date=20180115 AND city='SQL City' AND typ
 SELECT * FROM person WHERE address_street_name = "Franklin Ave" AND name LIKE "Annabel%";
 ```
 ### Evidencia
+![Primer testigo](evidencia/Paso2_1.png)
 
 > **Conclusión**
 > Según el esquema dado, se hace la busqueda del primer testigo en la tabla persona, la cual se le 
@@ -38,7 +40,7 @@ SELECT * FROM interview WHERE person_id = 16371
 ```
 
 ### Evidencia
-
+![Testimonio del primer testigo](evidencia/Paso2_2.png)
 
 > **Conclusión**
 > Se busca en la tabla de entrevistas por id de persona y se encuentra el testimonio que uno de los
@@ -56,7 +58,8 @@ WHERE p.address_street_name = "Northwestern Dr"
 ```
 
 ### Evidencia
-
+![Segundo Testigo](evidencia/Paso2_3_1.png)
+![Segundo Testigo](evidencia/Paso2_3_2.png)
 
 > **Conclusión**
 > Haciendo la union de las tablas persona y entrevista, tomando como coincidencia la calle donde
@@ -76,7 +79,7 @@ WHERE id LIKE "48Z%" AND membership_status = 'gold'
 ```
 
 ### Evidencia
-
+![Primera pista sospechoso](evidencia/Paso3.png)
 
 > **Conclusión**
 > Se busca por la primera pista del testigo que vio correr al asesino, por el número de socio
@@ -91,7 +94,7 @@ WHERE person_id IN (28819, 67318)
 ```
 
 ### Evidencia
-
+![Busqueda de sospechosos en eventos](evidencia/Paso4.png)
 
 > **Conclusión**
 > Los resultados de la consulta muestra que la persona con el id 67318 asiste al evento de
@@ -106,7 +109,7 @@ INSERT INTO solution VALUES (1, 'Jeremy Bowers');
 ```
 
 ### Evidencia
-
+![Primer resultado](evidencia/Paso5.png)
 
 > **Conclusión**
 > Se inserta en la solución el nombre de Jeremy Bowers, por  lo que se encontró el asesino
@@ -123,7 +126,7 @@ WHERE person_id = 67318
 ```
 
 ### Evidencia
-
+![Testimonio del asesino](evidencia/Paso6.png)
 
 > **Conclusión**
 > Al buscar la entrevista con el id de Jeremy Bowers se encuentra que este fue ordenado
@@ -149,7 +152,7 @@ dl.car_make = 'Tesla'
 ```
 
 ### Evidencia
-
+![Busqueda de autora intelectual](evidencia/Paso7.png)
 
 > **Conclusión**
 > Se hace una query que une todas las pistas dadas por Jeremy en su declaración, lo que nos lleva
@@ -163,7 +166,7 @@ INSERT INTO solution VALUES (1, 'Miranda Priestly');
 ```
 
 ### Evidencia
-
+![Resultado final](evidencia/Paso8.png)
 
 > **Conclusión**
 > Se inserta el nombre Miranda Priestly y se confirma que es la autora intelectual del crimen
